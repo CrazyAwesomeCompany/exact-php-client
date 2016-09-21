@@ -24,6 +24,7 @@ class Journal extends Model
         'Description',
         'ID',
         'Type',
+        'GLAccount',
     ];
 
     protected $url = 'financial/Journals';
