@@ -54,7 +54,7 @@ class Connection
     /**
      * @var
      */
-    private $accessToken;
+    protected $accessToken;
 
     /**
      * @var
@@ -144,7 +144,7 @@ class Connection
      * @param array $headers
      * @return Request
      */
-    private function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
+    protected function createRequest($method = 'GET', $endpoint, $body = null, array $params = [], array $headers = [])
     {
         // Add default json headers to the request
         $headers = array_merge($headers, [
@@ -252,6 +252,17 @@ class Connection
         }
     }
 
+    public function download($id)
+    {
+        $url = $this->baseUrl . '/docs/SysAttachment.aspx';
+
+        $request = $this->createRequest('GET', $url, null, ['ID' => $id]);
+
+        $response = $this->client->send($request);
+        Psr7\rewind_body($response);
+        return (string) $response->getBody()->getContents();
+    }
+
     /**
      * @return string
      */
@@ -336,7 +347,7 @@ class Connection
      * @return mixed
      * @throws ApiException
      */
-    private function parseResponse(Response $response)
+    protected function parseResponse(Response $response)
     {
         try {
 
@@ -399,7 +410,7 @@ class Connection
         return $this->accessToken;
     }
 
-    private function acquireAccessToken()
+    protected function acquireAccessToken()
     {
         // If refresh token not yet acquired, do token request
         if (empty($this->refreshToken)) {
@@ -467,7 +478,7 @@ class Connection
         $this->tokenExpires = $tokenExpires;
     }
 
-    private function tokenHasExpired()
+    protected function tokenHasExpired()
     {
         if (empty($this->tokenExpires)) {
             return true;
@@ -476,7 +487,7 @@ class Connection
         return $this->tokenExpires <= time();
     }
 
-    private function formatUrl($endPoint, $includeDivision = true, $formatNextUrl = false)
+    protected function formatUrl($endPoint, $includeDivision = true, $formatNextUrl = false)
     {
         if ($formatNextUrl) {
             return $endPoint;
@@ -551,7 +562,7 @@ class Connection
     /**
      * @return string
      */
-    private function getApiUrl()
+    protected function getApiUrl()
     {
         return $this->baseUrl . $this->apiUrl;
     }

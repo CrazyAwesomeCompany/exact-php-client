@@ -59,7 +59,9 @@ class PrintedSalesInvoice extends Model
 
     public function insert()
     {
-        return $this->connection()->post($this->url, $this->json());
+        $result = $this->connection()->post($this->url, $this->json());
+        $this->fill($result);
+        return $result;
     }
 
     protected $url = 'salesinvoice/PrintedSalesInvoices';

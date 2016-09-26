@@ -27,4 +27,8 @@ class DocumentAttachment extends Model
 
     protected $url = 'documents/DocumentAttachments';
 
+    public function download()
+    {
+        return $this->connection()->download($this->ID);
+    }
 }
