@@ -24,7 +24,9 @@ class Journal extends Model
         'Description',
         'ID',
         'Type',
+        'Currency',
         'GLAccount',
+        'AllowVariableExchangeRate'
     ];
 
     protected $url = 'financial/Journals';

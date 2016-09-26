@@ -78,7 +78,6 @@ class SalesInvoice extends Model
         'DocumentSubject',
         'DueDate',
         'InvoiceDate',
-        'InvoiceNumber',
         'InvoiceTo',
         'InvoiceToContactPerson',
         'InvoiceToContactPersonFullName',
