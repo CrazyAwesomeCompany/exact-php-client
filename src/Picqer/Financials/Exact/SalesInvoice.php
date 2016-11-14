@@ -96,6 +96,7 @@ class SalesInvoice extends Model
         'OrderNumber',
         'PaymentCondition',
         'PaymentConditionDescription',
+        'PaymentReference',
         'Remarks',
         'SalesInvoiceLines',
         'Salesperson',
